@@ -66,7 +66,7 @@ public class Dancer extends Person
      */
     @Override
     public String toString() {
-        return name + " (" + role + ")";
+        return name + ", " + age +" (" + role + ")";
     }
     
     // overriding equals method
