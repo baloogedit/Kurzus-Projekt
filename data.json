@@ -1,87 +1,191 @@
 {
     "dancers": [
         {
-            "role": "expert",
-            "name": "Edit",
-            "age": 19,
-            "dances": 9
-        },
-        {
-            "role": "expert",
-            "name": "David",
-            "age": 20,
-            "dances": 10
-        },
-        {
-            "role": "beginner",
-            "name": "Anna",
-            "age": 18,
-            "dances": 3
-        },
-        {
-            "role": "leader",
-            "name": "Peter",
-            "age": 22,
-            "dances": 5
-        },
-        {
             "role": "member",
             "name": "Kata",
             "age": 21,
             "dances": 6
         },
         {
-            "role": "begginer",
+            "role": "beginner",
             "name": "Klemi",
             "age": 17,
             "dances": 2
         },
         {
             "role": "beginner",
-            "name": "Balazs",
+            "name": "Gergő",
+            "age": 12,
+            "dances": 4
+        },
+        {
+            "role": "expert",
+            "name": "Edit",
+            "age": 20,
+            "dances": 14
+        },
+        {
+            "role": "member",
+            "name": "Orsi",
+            "age": 25,
+            "dances": 8
+        },
+        {
+            "role": "member",
+            "name": "Emese",
+            "age": 47,
+            "dances": 6
+        },
+        {
+            "role": "member",
+            "name": "Erika",
+            "age": 50,
+            "dances": 6
+        },
+        {
+            "role": "member",
+            "name": "Iringó",
+            "age": 16,
+            "dances": 7
+        },
+        {
+            "role": "expert",
+            "name": "Ágota",
+            "age": 17,
+            "dances": 10
+        },
+        {
+            "role": "member",
+            "name": "Tamara",
             "age": 18,
+            "dances": 7
+        },
+        {
+            "role": "beginner",
+            "name": "Lilla",
+            "age": 13,
+            "dances": 3
+        },
+        {
+            "role": "expert",
+            "name": "Évike",
+            "age": 23,
+            "dances": 9
+        },
+        {
+            "role": "leader",
+            "name": "Iza",
+            "age": 45,
+            "dances": 8
+        },
+        {
+            "role": "expert",
+            "name": "Sanyi",
+            "age": 26,
+            "dances": 11
+        },
+        {
+            "role": "member",
+            "name": "Dénes",
+            "age": 53,
+            "dances": 6
+        },
+        {
+            "role": "expert",
+            "name": "Lóri",
+            "age": 24,
+            "dances": 13
+        },
+        {
+            "role": "member",
+            "name": "István",
+            "age": 49,
             "dances": 6
         },
         {
             "role": "leader",
-            "name": "Izabella",
-            "age": 40,
-            "dances": 8
+            "name": "Csaba",
+            "age": 48,
+            "dances": 6
         },
         {
-            "role": "beginner",
-            "name": "Gergo",
-            "age": 12,
-            "dances": 4
+            "role": "expert",
+            "name": "Dávid",
+            "age": 21,
+            "dances": 15
+        },
+        {
+            "role": "member",
+            "name": "Balázs",
+            "age": 19,
+            "dances": 9
+        },
+        {
+            "role": "expert",
+            "name": "Déneske",
+            "age": 17,
+            "dances": 12
+        },
+        {
+            "role": "member",
+            "name": "Szabolcs",
+            "age": 16,
+            "dances": 7
+        },
+        {
+            "role": "member",
+            "name": "Bence",
+            "age": 16,
+            "dances": 8
         }
     ],
     "staff": [
         {
-            "name": "Maria",
-            "department": "Konyveles",
+            "name": "Mária",
+            "department": "Könyvelés",
             "age": 30
         },
         {
             "name": "Zoli",
             "department": "Technikus",
             "age": 23
+        },
+        {
+            "name": "Lászlo",
+            "department": "Logisztika",
+            "age": 45
+        },
+        {
+            "name": "Boglárka",
+            "department": "Marketing",
+            "age": 28
+        },
+        {
+            "name": "Attila",
+            "department": "Karbantartás",
+            "age": 52
+        },
+        {
+            "name": "Eszter",
+            "department": "Adminisztráció",
+            "age": 34
         }
     ],
     "costumes": [
         {
             "size": "M",
             "name": "Kalocsai melleny",
-            "assignedTo": null
+            "assignedTo": "Edit"
         },
         {
             "size": "L",
             "name": "Kalotaszegi ing",
-            "assignedTo": "David"
+            "assignedTo": "Dávid"
         },
         {
             "size": "XL",
             "name": "Szentivanyi ing",
-            "assignedTo": null
+            "assignedTo": "Dénes"
         },
         {
             "size": "S",
@@ -92,33 +196,163 @@
             "size": "M",
             "name": "Somogyi kalap",
             "assignedTo": null
+        },
+        {
+            "size": "L",
+            "name": "Fekete csizma",
+            "assignedTo": null
+        },
+        {
+            "size": "S",
+            "name": "Piros pántlika",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Vajdaszentiványi ing",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Kalotaszegi pántlika",
+            "assignedTo": null
+        },
+        {
+            "size": "L",
+            "name": "Fehér gyapjú harisnya",
+            "assignedTo": null
+        },
+        {
+            "size": "XL",
+            "name": "Mezőségi lájbi",
+            "assignedTo": null
+        },
+        {
+            "size": "S",
+            "name": "Széki szoknya",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Széki ing",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Bonchidai kötény",
+            "assignedTo": null
+        },
+        {
+            "size": "L",
+            "name": "Palatkai csizma",
+            "assignedTo": null
+        },
+        {
+            "size": "L",
+            "name": "Szatmári szoknya",
+            "assignedTo": "Iza"
+        },
+        {
+            "size": "S",
+            "name": "Rábaközi kendő",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Sárközi főkötő",
+            "assignedTo": null
+        },
+        {
+            "size": "XL",
+            "name": "Somogyi ing",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Felcsíki csizma",
+            "assignedTo": null
+        },
+        {
+            "size": "L",
+            "name": "Marosszéki lajbi",
+            "assignedTo": null
+        },
+        {
+            "size": "S",
+            "name": "Gyimesi rokolya",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Gyimesi harisnya",
+            "assignedTo": "Lóri"
+        },
+        {
+            "size": "L",
+            "name": "Fekete báránybőr mellény",
+            "assignedTo": null
+        },
+        {
+            "size": "M",
+            "name": "Hímzett vállkendő",
+            "assignedTo": null
         }
     ],
     "events": [
         {
             "date": "2025-11-05",
-            "name": "Harvest Festival",
+            "name": "Szüret Fesztivál",
             "place": "Budapest"
         },
         {
             "date": "2025-12-10",
-            "name": "Village Day",
-            "place": "Marosvasarhely"
+            "name": "Marosvásárhelyi Napok",
+            "place": "Marosvásárhely"
         },
         {
             "date": "2026-03-15",
-            "name": "Spring Ball",
-            "place": "Kolozsvar"
+            "name": "Tavaszi Bál",
+            "place": "Kolozsvár"
         },
         {
             "date": "2026-04-20",
-            "name": "Folk Night",
-            "place": "Szekelyudvarhely"
+            "name": "Folk Est",
+            "place": "Székelyudvarhely"
         },
         {
             "date": "2026-06-01",
-            "name": "Anniversary Gala",
-            "place": "Gyergyoszentmiklos"
+            "name": "10 Éves Évforduló Gálaest",
+            "place": "Gyergyószentmiklós"
+        },
+        {
+            "date": "2026-09-15",
+            "name": "Szüreti Bál",
+            "place": "Székelykeresztúr"
+        },
+        {
+            "date": "2027-01-20",
+            "name": "Téli Táncháztalálkozó",
+            "place": "Csíkszereda"
+        },
+        {
+            "date": "2027-02-18",
+            "name": "Farsangi Mulatság",
+            "place": "Kézdivásárhely"
+        },
+        {
+            "date": "2027-03-15",
+            "name": "Március 15. Megemlékezés",
+            "place": "Budapest"
+        },
+        {
+            "date": "2027-05-24",
+            "name": "Pünkösdi Királyválasztás",
+            "place": "Gyimes"
+        },
+        {
+            "date": "2027-07-10",
+            "name": "Nyári Fesztivál",
+            "place": "Debrecen"
         }
     ],
     "choreographers": [
@@ -137,27 +371,77 @@
         {
             "minutes": 3,
             "name": "Verbunk",
-            "region": "Mezoseg"
+            "region": "Mezőség"
         },
         {
             "minutes": 5,
-            "name": "Csardas",
-            "region": "Nyaradmente"
+            "name": "Csárdás",
+            "region": "Nyárádmente"
         },
         {
             "minutes": 4,
-            "name": "Legenyes",
+            "name": "Legényes",
             "region": "Kalotaszeg"
         },
         {
             "minutes": 6,
             "name": "Batuka",
-            "region": "Vajdaszentivany"
+            "region": "Vajdaszentivány"
         },
         {
             "minutes": 3,
             "name": "Ugrós",
             "region": "Somogy"
+        },
+        {
+            "minutes": 8,
+            "name": "Széki csárdás",
+            "region": "Szék"
+        },
+        {
+            "minutes": 5,
+            "name": "Forgatós",
+            "region": "Bonchida"
+        },
+        {
+            "minutes": 4,
+            "name": "Kalotaszegi páros",
+            "region": "Kalotaszeg"
+        },
+        {
+            "minutes": 3,
+            "name": "Sárközi ugrós",
+            "region": "Sárköz"
+        },
+        {
+            "minutes": 5,
+            "name": "Palatkai legényes",
+            "region": "Magyarpalatka"
+        },
+        {
+            "minutes": 4,
+            "name": "Rábaközi dus",
+            "region": "Rábaköz"
+        },
+        {
+            "minutes": 6,
+            "name": "Szatmári csárdás",
+            "region": "Szatmár"
+        },
+        {
+            "minutes": 5,
+            "name": "Küküllő-menti",
+            "region": "Kisküküllő"
+        },
+        {
+            "minutes": 4,
+            "name": "Felcsíki legényes",
+            "region": "Felcsík"
+        },
+        {
+            "minutes": 7,
+            "name": "Marosszéki forgatós",
+            "region": "Marosszék"
         }
     ]
 }
