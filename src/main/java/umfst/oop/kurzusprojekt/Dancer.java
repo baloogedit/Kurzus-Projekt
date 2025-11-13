@@ -1,8 +1,5 @@
 package umfst.oop.kurzusprojekt;
 
-/**
- * MÓDOSÍTVA: introString() és toString() implementálva.
- */
 public class Dancer extends Person
 {
     private String role;
@@ -41,29 +38,24 @@ public class Dancer extends Person
     public void setRole(String role, String reason)
     {
         this.setRole(role);
-        // A konzolra írás helyett ezt is egy logba kellene menteni,
-        // de egyelőre maradhat debug célból.
+        // only for debug purposes
         System.out.println("Caution: " + this.name + " 's role changed, because: " + reason);
     }
     
-    
+    //overriden abstract method
     @Override
     public String introString()
     {
         return "TÁNCOS: " + name +", " + age + " éves. Szerepkör: "+ role + ", " + knownDances +" táncot ismer.";
     }
 
-    /**
-     * Ez a metódus már nem használatos a GUI-ban, de maradhat.
-     */
+    // not used
     public void print()
     {
         System.out.println("Name: "+ name +", age: "+ age + ", role: "+ role + ", known dances: "+ knownDances);
     }
     
-    /**
-     * ÚJ: toString() a JList-ben való szép megjelenítéshez.
-     */
+     // toString for nice display in Jlist
     @Override
     public String toString() {
         return name + ", " + age +" (" + role + ")";

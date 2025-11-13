@@ -1,9 +1,7 @@
 package umfst.oop.kurzusprojekt;
 
-/**
- * Absztrakt ősosztály.
- * MÓDOSÍTVA: intro() helyett introString() van, ami String-et ad vissza.
- */
+// abstract parent class
+
 public abstract class Person {
     
     protected String name;
@@ -31,10 +29,10 @@ public abstract class Person {
         this.age = age;
     }
     
-    /**
-     * Polimorf metódus, ami visszaad egy bemutatkozó szöveget.
-     * A GUI fogja ezt megjeleníteni.
-     */
+    
+    // the polimorph, abstract method that needs to be overridden
+    // it will be the introduction text
+    // this is what the GUI will show
     public abstract String introString();
     
 }

@@ -1,0 +1,141 @@
+{
+    "dancers": [
+        {
+            "role": "expert",
+            "name": "Edit",
+            "age": 19,
+            "dances": 9
+        },
+        {
+            "role": "expert",
+            "name": "David",
+            "age": 20,
+            "dances": 10
+        },
+        {
+            "role": "beginner",
+            "name": "Anna",
+            "age": 18,
+            "dances": 3
+        },
+        {
+            "role": "leader",
+            "name": "Peter",
+            "age": 22,
+            "dances": 5
+        },
+        {
+            "role": "member",
+            "name": "Kata",
+            "age": 21,
+            "dances": 6
+        },
+        {
+            "role": "begginer",
+            "name": "Klemi",
+            "age": 17,
+            "dances": 2
+        },
+        {
+            "role": "beginner",
+            "name": "Balazs",
+            "age": 18,
+            "dances": 6
+        },
+        {
+            "role": "leader",
+            "name": "Izabella",
+            "age": 40,
+            "dances": 8
+        },
+        {
+            "role": "beginner",
+            "name": "Gergo",
+            "age": 12,
+            "dances": 4
+        }
+    ],
+    "staff": [],
+    "costumes": [
+        {
+            "size": "M",
+            "name": "Kalocsai melleny",
+            "assignedTo": null
+        },
+        {
+            "size": "L",
+            "name": "Kalotaszegi ing",
+            "assignedTo": "David"
+        },
+        {
+            "size": "XL",
+            "name": "Szentivanyi ing",
+            "assignedTo": null
+        },
+        {
+            "size": "S",
+            "name": "Mezosegi koteny",
+            "assignedTo": "Kata"
+        },
+        {
+            "size": "M",
+            "name": "Somogyi kalap",
+            "assignedTo": null
+        }
+    ],
+    "events": [
+        {
+            "date": "2025-11-05",
+            "name": "Harvest Festival",
+            "place": "Budapest"
+        },
+        {
+            "date": "2025-12-10",
+            "name": "Village Day",
+            "place": "Marosvasarhely"
+        },
+        {
+            "date": "2026-03-15",
+            "name": "Spring Ball",
+            "place": "Kolozsvar"
+        },
+        {
+            "date": "2026-04-20",
+            "name": "Folk Night",
+            "place": "Szekelyudvarhely"
+        },
+        {
+            "date": "2026-06-01",
+            "name": "Anniversary Gala",
+            "place": "Gyergyoszentmiklos"
+        }
+    ],
+    "choreographers": [],
+    "dances": [
+        {
+            "minutes": 3,
+            "name": "Verbunk",
+            "region": "Mezoseg"
+        },
+        {
+            "minutes": 5,
+            "name": "Csardas",
+            "region": "Nyaradmente"
+        },
+        {
+            "minutes": 4,
+            "name": "Legenyes",
+            "region": "Kalotaszeg"
+        },
+        {
+            "minutes": 6,
+            "name": "Batuka",
+            "region": "Vajdaszentivany"
+        },
+        {
+            "minutes": 3,
+            "name": "Ugrós",
+            "region": "Somogy"
+        }
+    ]
+}

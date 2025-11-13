@@ -11,17 +11,17 @@ package umfst.oop.kurzusprojekt;
 public interface DanceStructure {
     
     //start performing the dance
-    void perform();
+    String getPerform();
     
     //show the dance's origin or region
-    void showOrigin();
+    String getOrigin();
     
     //display how long the dance lasts
-    void showDuration();
+    String getDuration();
     
     // display full details of the dance
     void print();
     
     // describe what type of dance it is
-    void describeStyle();
+    String getStyleDescription();
 }

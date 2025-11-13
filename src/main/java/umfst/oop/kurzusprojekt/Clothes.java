@@ -1,14 +1,13 @@
 package umfst.oop.kurzusprojekt;
 
-/**
- * MÓDOSÍTVA: toString() implementálva.
- */
+
 public class Clothes {
     
     private String clothName;
     private Size size;
     private Dancer assignedTo;
     
+    //2 parameter constructor
     public Clothes(String name, Size size)
     {
         this.clothName=name;
@@ -16,7 +15,7 @@ public class Clothes {
         this.assignedTo=null;
     }
 
-    // A 3 paraméteres konstruktor maradhat, bár a GUI most nem használja.
+    // 3 parameter contructor
     public Clothes(String name, Size size, Dancer assignedTo) {
         this.clothName = name;
         this.size = size;
@@ -52,9 +51,7 @@ public class Clothes {
        System.out.println(this.toString());
     }
     
-    /**
-     * ÚJ: toString() a JList-ben való szép megjelenítéshez.
-     */
+    // toString for nice display in Jlist
     @Override
     public String toString() {
         String status = (assignedTo == null) ? "Szabad" : ("Kiadva: " + assignedTo.getName());

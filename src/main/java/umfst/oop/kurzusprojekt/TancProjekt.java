@@ -11,11 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Ez az osztály tartalmazza az alkalmazás logikáját (adatkezelés, mentés, töltés).
- * NINCS BENNE GUI KÓD VAGY KONZOLOS BEOLVASÁS.
- * A TancGUI osztály hívja meg a metódusait.
- */
+
+// it has the logic of the application (data management, saving, loading)
+// the GUI calls for its methods
+
 public class TancProjekt {
 
     // Adattároló listák
@@ -26,14 +25,14 @@ public class TancProjekt {
     private static ArrayList<Choreographer> choreographers = new ArrayList<>();
     private static ArrayList<Staff> staff = new ArrayList<>();
     
-    // Polimorf lista
+    // polimorph list
     private static ArrayList<Person> allPeople = new ArrayList<>();
 
-    // Érvényes szerepkörök listája
+    // valid roles list
     private static final List<String> VALID_ROLES = Arrays.asList("leader", "member", "beginner", "expert");
     
-    // --- GETTEREK A GUI SZÁMÁRA ---
-    // A GUI ezeken keresztül éri el az adatokat
+    // getters for the GUI
+    // through these does the GUI accesses the data
 
     public static ArrayList<Dancer> getDancers() { return dancers; }
     public static ArrayList<Dance> getDances() { return dances; }
@@ -44,12 +43,10 @@ public class TancProjekt {
     public static ArrayList<Person> getAllPeople() { return allPeople; }
 
     
-    // --- Létrehozó (CREATE) metódusok ---
-    // A GUI hívja meg ezeket, miután összegyűjtötte az adatokat
+    // create methods
+    // GUI calls these after collecting data
 
-    /**
-     * Létrehoz egy új táncost és hozzáadja a listákhoz.
-     */
+    // create new dancer
     public static void createDancer(String name, int age, String role, int dances) throws InvalidRoleException {
         if (!VALID_ROLES.contains(role.toLowerCase())) {
             throw new InvalidRoleException("Invalid role: '" + role + "'. Must be one of: " + VALID_ROLES);
@@ -60,36 +57,28 @@ public class TancProjekt {
         saveDataToJson(); // Automatikus mentés
     }
 
-    /**
-     * Létrehoz egy új táncot.
-     */
+    // create new dance
     public static void createDance(String name, String region, int minutes) {
         Dance newDance = new Dance(name, region, minutes);
         dances.add(newDance);
         saveDataToJson();
     }
     
-    /**
-     * Létrehoz egy új jelmezt.
-     */
+    //create new clothes
     public static void createCostume(String name, Size size) {
         Clothes newCostume = new Clothes(name, size);
         costumes.add(newCostume);
         saveDataToJson();
     }
     
-    /**
-     * Létrehoz egy új eseményt.
-     */
+    // create new event
     public static void createEvent(String name, Date date, String place) {
         Event newEvent = new Event(name, date, place);
         events.add(newEvent);
         saveDataToJson();
     }
     
-    /**
-     * Létrehoz egy új koreográfust.
-     */
+    // create new choreographer
     public static void createChoreographer(String name, int age, int experience) {
         Choreographer newChoreo = new Choreographer(name, age, experience);
         choreographers.add(newChoreo);
@@ -97,9 +86,7 @@ public class TancProjekt {
         saveDataToJson();
     }
     
-    /**
-     * Létrehoz egy új stábtagot.
-     */
+    //create new staff
     public static void createStaff(String name, int age, String department) {
         Staff newStaff = new Staff(name, age, department);
         staff.add(newStaff);
@@ -108,11 +95,9 @@ public class TancProjekt {
     }
 
     
-    // --- Műveleti metódusok ---
+    // operational methods
 
-    /**
-     * Hozzárendel egy jelmezt egy táncoshoz.
-     */
+    //assigning costume to dancer
     public static void assignCostumeLogic(Clothes costume, Dancer dancer) {
         if (costume != null && dancer != null) {
             costume.setAssignedTo(dancer);
@@ -120,9 +105,7 @@ public class TancProjekt {
         }
     }
     
-    /**
-     * Visszaadja az összes személy bemutatkozását (polimorf hívás).
-     */
+    // returns the intro of all Person based objects
     public static String getAllPeopleIntros() {
         if (allPeople.isEmpty()) {
             return "Nincsenek személyek a rendszerben.";
@@ -135,13 +118,11 @@ public class TancProjekt {
     }
 
 
-    // --- JSON ADATKEZELÉS ---
+    // JSON data handling
 
-    /**
-     * Betölti az összes adatot a data.json fájlból.
-     */
+    // load the data from json file
     public static void loadDataFromJson() {
-        // Töröljük a régi adatokat, hogy ne duplikálódjanak
+        // clear old data so there are no duplicates
         dancers.clear();
         dances.clear();
         costumes.clear();
@@ -247,9 +228,7 @@ public class TancProjekt {
         }
     }
 
-    /**
-     * Elmenti az összes adatot a data.json fájlba.
-     */
+    // save all data to json file
     public static void saveDataToJson() {
         try {
             JSONObject root = new JSONObject();
@@ -321,9 +300,9 @@ public class TancProjekt {
             }
             root.put("staff", staffArr);
 
-            // Fájlba írás
+            // write in the file
             Files.writeString(Paths.get("data.json"), root.toString(4));
-            System.out.println("Data saved successfully to data.json!"); // Ez maradhat debug célból
+            System.out.println("Data saved successfully to data.json!"); // dedugging purposes
 
         } catch (IOException e) {
             System.err.println("Error writing to data.json: " + e.getMessage());

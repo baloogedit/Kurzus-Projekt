@@ -1,8 +1,6 @@
 package umfst.oop.kurzusprojekt;
 
-/**
- * MÓDOSÍTVA: toString() implementálva.
- */
+
 public class Dance implements DanceStructure{
     
     public String danceName;
@@ -21,42 +19,41 @@ public class Dance implements DanceStructure{
         System.out.println(this.toString());
     }
     
-    /**
-     * ÚJ: toString() a JList-ben való szép megjelenítéshez.
-     */
+    
     @Override
     public String toString() {
         return danceName + " (" + region + ", " + minutes + " perc)";
     }
+ 
     
-    // ... a többi metódus (perform, showOrigin, stb.) változatlan marad ...
+    // string returning methods for GUI
+    @Override
+    public String getPerform() {
+        return "Performing the dance '" + danceName + "' energetically on stage!";
+    }
     
     @Override
-    public void perform() {
-        System.out.println("Performing the dance '" + danceName + "' energetically on stage!");
+    public String getOrigin() {
+        return "This dance originates from the region of " + region + ".";
     }
 
     @Override
-    public void showOrigin() {
-        System.out.println("This dance originates from the region of " + region + ".");
+    public String getDuration() {
+        return "The dance '" + danceName + "' lasts about " + minutes + " minutes.";
     }
-
+    
     @Override
-    public void showDuration() {
-        System.out.println("The dance '" + danceName + "' lasts about " + minutes + " minutes.");
-    }
-
-    @Override
-    public void describeStyle() {
+    public String getStyleDescription() {
         if (minutes < 3) {
-            System.out.println(danceName + " is a short, lively dance.");
+            return danceName + " is a short, lively dance.";
         } else if (minutes < 7) {
-            System.out.println(danceName + " is a traditional medium-length folk dance.");
+            return danceName + " is a traditional medium-length folk dance.";
         } else {
-            System.out.println(danceName + " is a long ceremonial performance.");
+            return danceName + " is a long ceremonial performance.";
         }
     }
     
+       
     public String getName() {
         return danceName;
     }

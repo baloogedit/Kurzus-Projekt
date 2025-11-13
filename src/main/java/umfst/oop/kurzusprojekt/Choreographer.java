@@ -1,8 +1,5 @@
 package umfst.oop.kurzusprojekt;
 
-/**
- * MÓDOSÍTVA: intro() -> introString()
- */
 public class Choreographer extends Person{
     private int yearsOfExperience;
     

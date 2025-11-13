@@ -2,9 +2,6 @@ package umfst.oop.kurzusprojekt;
 
 import java.sql.Date;
 
-/**
- * MÓDOSÍTVA: toString() implementálva.
- */
 public class Event {
     
     private String eventName;
@@ -47,9 +44,7 @@ public class Event {
         System.out.println(this.toString());
     }
     
-    /**
-     * ÚJ: toString() a JList-ben való szép megjelenítéshez.
-     */
+    
     @Override
     public String toString() {
         return eventName + " [" + place + ", " + date.toString() + "]";

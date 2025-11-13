@@ -17,60 +17,65 @@ import java.util.ArrayList;
  */
 public class KurzusProjekt extends JFrame{
 
-    // GUI Komponensek
+    // GUI components
     private JTabbedPane tabbedPane;
     
-    // Listák fül
+    // list tab
     private JTextArea listDisplayArea;
     
-    // Jelmez kiadás fül
+    // costume assignment tab
     private JList<Clothes> costumeList;
     private JList<Dancer> dancerList;
     private DefaultListModel<Clothes> costumeListModel;
     private DefaultListModel<Dancer> dancerListModel;
+    
+    // dance details tab
+    private JList<Dance> danceSelectorList;
+    private DefaultListModel<Dance> danceSelectorListModel;
+    private JTextArea danceDescribeArea;
 
-    /**
-     * A GUI fő konstruktora.
-     */
+    
+    // GUI contructor
     public KurzusProjekt() {
-        // Ablak alapbeállításai
+        // the window basic setting
         setTitle("Néptánc Projekt Menedzser");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Középre igazítás
+        setLocationRelativeTo(null); // align in center
 
-        // Adatok betöltése indításkor
+        // load data when starting
         try {
             TancProjekt.loadDataFromJson();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Hiba a data.json betöltésekor: " + e.getMessage(), "Betöltési Hiba", JOptionPane.ERROR_MESSAGE);
         }
 
-        // Fő füles elrendezés
+        // main tab layout
         tabbedPane = new JTabbedPane();
 
-        // 1. Fül: Adatkezelés (Hozzáadás)
+        // 1.tab - management(add)
         tabbedPane.addTab("Kezelés", createManagementPanel());
 
-        // 2. Fül: Listázás
+        // 2.tab - listing
         tabbedPane.addTab("Listák", createListPanel());
 
-        // 3. Fül: Jelmez Kiadás
+        // 3.tab - costume assignment
         tabbedPane.addTab("Jelmez Kiadás", createAssignmentPanel());
 
-        // Hozzáadjuk a füleket az ablakhoz
+        // tab 4 - dance details
+        tabbedPane.addTab("Dance Details", createDescribeDancePanel());
+        
+        // add tabs to window
         add(tabbedPane);
         
-        // Frissítjük a listákat a GUI-n
+        // refresh the lists of GUI
         refreshGuiLists();
     }
 
-    /**
-     * Létrehozza az "Kezelés" fület gombokkal.
-     */
+    // create the managing tab with buttons
     private JPanel createManagementPanel() {
-        JPanel panel = new JPanel(new GridLayout(0, 1, 10, 10)); // Egy oszlopos rács
-        panel.setBorder(new EmptyBorder(20, 20, 20, 20)); // Belső margó
+        JPanel panel = new JPanel(new GridLayout(0, 1, 10, 10)); // single-column grid layout
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20)); // inner margin
 
         JButton addDancerBtn = new JButton("Táncos hozzáadása...");
         addDancerBtn.addActionListener(e -> onAddDancer());
@@ -96,7 +101,7 @@ public class KurzusProjekt extends JFrame{
         addStaffBtn.addActionListener(e -> onAddStaff());
         panel.add(addStaffBtn);
         
-        panel.add(new JSeparator()); // Elválasztó
+        panel.add(new JSeparator()); 
         
         JButton saveBtn = new JButton("Mentés (JSON)");
         saveBtn.addActionListener(e -> {
@@ -108,9 +113,7 @@ public class KurzusProjekt extends JFrame{
         return panel;
     }
 
-    /**
-     * Létrehozza a "Listák" fület.
-     */
+    // create the listing tab
     private JPanel createListPanel() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -121,7 +124,7 @@ public class KurzusProjekt extends JFrame{
         JScrollPane scrollPane = new JScrollPane(listDisplayArea);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        // Gomb panel a listázáshoz
+        // button panel(row) for listing
         JPanel buttonPanel = new JPanel(new FlowLayout());
         
         JButton listDancersBtn = new JButton("Táncosok");
@@ -149,37 +152,35 @@ public class KurzusProjekt extends JFrame{
         return panel;
     }
 
-    /**
-     * Létrehozza a "Jelmez Kiadás" fület.
-     */
+    // create the costume assign tab
     private JPanel createAssignmentPanel() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Listák modellek
+        // list models
         costumeListModel = new DefaultListModel<>();
         dancerListModel = new DefaultListModel<>();
 
-        // Listák
+        // lists
         costumeList = new JList<>(costumeListModel);
         dancerList = new JList<>(dancerListModel);
 
         costumeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dancerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        // Görgethetővé tesszük őket
+        // make it scrollable
         JScrollPane costumeScroll = new JScrollPane(costumeList);
         costumeScroll.setBorder(BorderFactory.createTitledBorder("Válassz Jelmezt"));
         
         JScrollPane dancerScroll = new JScrollPane(dancerList);
         dancerScroll.setBorder(BorderFactory.createTitledBorder("Válassz Táncost"));
 
-        // Egy osztott panelre tesszük a két listát
+        // put them on a split pane
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, costumeScroll, dancerScroll);
         splitPane.setResizeWeight(0.5); // Egyenlő arányban ossza el a helyet
         panel.add(splitPane, BorderLayout.CENTER);
 
-        // Gomb panel
+        // button panel
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton assignButton = new JButton("Hozzárendelés");
         assignButton.addActionListener(e -> onAssignCostume());
@@ -194,10 +195,64 @@ public class KurzusProjekt extends JFrame{
         return panel;
     }
     
-    // --- Akciókezelő Metódusok (Adatbevitel) ---
+    // create dance describe tab
+    private JPanel createDescribeDancePanel() {
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
+        // list model and list
+        danceSelectorListModel = new DefaultListModel<>();
+        danceSelectorList = new JList<>(danceSelectorListModel);
+        danceSelectorList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane listScroll = new JScrollPane(danceSelectorList);
+        listScroll.setBorder(BorderFactory.createTitledBorder("Select Dance"));
+
+        // output area
+        danceDescribeArea = new JTextArea();
+        danceDescribeArea.setEditable(false);
+        danceDescribeArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        danceDescribeArea.setWrapStyleWord(true);
+        danceDescribeArea.setLineWrap(true);
+        JScrollPane textScroll = new JScrollPane(danceDescribeArea);
+        textScroll.setBorder(BorderFactory.createTitledBorder("Description"));
+
+        // split pane for list and text area
+        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, listScroll, textScroll);
+        splitPane.setResizeWeight(0.4); // Give 40% to the list
+        panel.add(splitPane, BorderLayout.CENTER);
+
+        // 4. button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        
+        JButton refreshBtn = new JButton("Refresh List");
+        refreshBtn.addActionListener(e -> refreshGuiLists()); // re-use the existing refresh method
+        buttonPanel.add(refreshBtn);
+
+        JButton performBtn = new JButton("Perform");
+        performBtn.addActionListener(e -> onDescribeDance("perform"));
+        buttonPanel.add(performBtn);
+
+        JButton originBtn = new JButton("Show Origin");
+        originBtn.addActionListener(e -> onDescribeDance("origin"));
+        buttonPanel.add(originBtn);
+
+        JButton durationBtn = new JButton("Show Duration");
+        durationBtn.addActionListener(e -> onDescribeDance("duration"));
+        buttonPanel.add(durationBtn);
+
+        JButton styleBtn = new JButton("Describe Style");
+        styleBtn.addActionListener(e -> onDescribeDance("style"));
+        buttonPanel.add(styleBtn);
+
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        return panel;
+    }
+    
+    
+    // data input methods
     private void onAddDancer() {
-        // Létrehozunk egy panelt a dialógusablakhoz
+        // create panel for dialog window
         JPanel formPanel = new JPanel(new GridLayout(0, 2, 5, 5));
         JTextField nameField = new JTextField(15);
         JSpinner ageSpinner = new JSpinner(new SpinnerNumberModel(20, 10, 80, 1));
@@ -224,10 +279,10 @@ public class KurzusProjekt extends JFrame{
                 
                 if(name.isEmpty()) throw new Exception("A név nem lehet üres!");
 
-                // Meghívjuk a logikai osztályt
+                // call for logical class(TancProjekt.java)
                 TancProjekt.createDancer(name, age, role, dances);
                 JOptionPane.showMessageDialog(this, "Táncos hozzáadva!");
-                refreshGuiLists(); // Frissítjük a listákat
+                refreshGuiLists(); // refresh lists
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Hiba: " + ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
             }
@@ -310,7 +365,7 @@ public class KurzusProjekt extends JFrame{
              try {
                 String name = nameField.getText();
                 String place = placeField.getText();
-                Date date = Date.valueOf(dateField.getText()); // Vigyázat, ez hibát dobhat!
+                Date date = Date.valueOf(dateField.getText()); // potential cause of error (catch)
                 
                 if(name.isEmpty() || place.isEmpty()) throw new Exception("A mezők nem lehetnek üresek!");
 
@@ -382,10 +437,10 @@ public class KurzusProjekt extends JFrame{
         }
     }
 
-    // --- Akciókezelő Metódusok (Listázás) ---
-
+    
+    // listing methods
     private void listDancers() {
-        StringBuilder sb = new StringBuilder("--- Táncosok Listája ---\n");
+        StringBuilder sb = new StringBuilder("--- Táncosok Listája (Összesen: " + Dancer.getDancerCount() + ")---\n");
         for (Dancer d : TancProjekt.getDancers()) {
             sb.append(d.toString()).append("\n");
         }
@@ -420,26 +475,33 @@ public class KurzusProjekt extends JFrame{
         listDisplayArea.setText(TancProjekt.getAllPeopleIntros());
     }
 
-    // --- Akciókezelő Metódusok (Hozzárendelés) ---
     
-    /**
-     * Frissíti a GUI-n lévő listákat (Jelmez kiadás fül)
-     */
+    // refresh gui lists
     private void refreshGuiLists() {
-        // Jelmezek frissítése
+        // refresh costumes
         costumeListModel.clear();
         for (Clothes c : TancProjekt.getCostumes()) {
-            if(c.getAssignedTo() == null) { // Csak a szabad jelmezeket listázzuk
+            if(c.getAssignedTo() == null) { // only list costumes eith no assigned Dancer
                 costumeListModel.addElement(c);
             }
         }
 
-        // Táncosok frissítése
+        // refresh dancers
         dancerListModel.clear();
         for (Dancer d : TancProjekt.getDancers()) {
             dancerListModel.addElement(d);
         }
+        
+        // refresh dance details list
+        if (danceSelectorListModel != null) { // Check if it's initialized
+            danceSelectorListModel.clear();
+            for (Dance d : TancProjekt.getDances()) {
+                danceSelectorListModel.addElement(d);
+            }
+        }
     }
+    
+    
     
     private void onAssignCostume() {
         Clothes selectedCostume = costumeList.getSelectedValue();
@@ -451,24 +513,56 @@ public class KurzusProjekt extends JFrame{
         }
 
         try {
-            // Logika hívása
+            // call the logic
             TancProjekt.assignCostumeLogic(selectedCostume, selectedDancer);
             JOptionPane.showMessageDialog(this, "Sikeres hozzárendelés:\n" + selectedCostume.getName() + " -> " + selectedDancer.getName());
             
-            // Frissítjük a GUI listákat
+            // refresh GUI lists
             refreshGuiLists();
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Hiba: " + ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    
+    // handle button clicks on dance details tab
+    private void onDescribeDance(String action) {
+        Dance selectedDance = danceSelectorList.getSelectedValue();
+        
+        if (selectedDance == null) {
+            JOptionPane.showMessageDialog(this, "Please select a dance from the list first!", "No Dance Selected", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        String description = "";
+        switch (action) {
+            case "perform":
+                description = selectedDance.getPerform(); 
+                break;
+            case "origin":
+                description = selectedDance.getOrigin();
+                break;
+            case "duration":
+                description = selectedDance.getDuration();
+                break;
+            case "style":
+                description = selectedDance.getStyleDescription();
+                break;
+        }
+        
+        danceDescribeArea.setText(description);
+    }
+    
+    
+    
 
 
     /**
-     * A program belépési pontja.
+     * the program entry point
      */
     public static void main(String[] args) {
-        // A Swing alkalmazásokat az Event Dispatch Thread-en (EDT) illik indítani.
+        // the swing applications run on Event Dispatch Thread
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
