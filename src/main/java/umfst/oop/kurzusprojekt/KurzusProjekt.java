@@ -33,6 +33,12 @@ public class KurzusProjekt extends JFrame{
     private JList<Dance> danceSelectorList;
     private DefaultListModel<Dance> danceSelectorListModel;
     private JTextArea danceDescribeArea;
+    
+    // change dancer role tab
+    private JList<Dancer> dancerRoleList;
+    private DefaultListModel<Dancer> dancerRoleListModel;
+    private JComboBox<String> roleChangeCombo;
+    private JTextField roleChangeReasonField;
 
     
     // GUI contructor
@@ -64,6 +70,9 @@ public class KurzusProjekt extends JFrame{
 
         // tab 4 - dance details
         tabbedPane.addTab("Dance Details", createDescribeDancePanel());
+        
+        // tab 5 - change role
+        tabbedPane.addTab("Change Role", createChangeRolePanel());
         
         // add tabs to window
         add(tabbedPane);
@@ -248,6 +257,83 @@ public class KurzusProjekt extends JFrame{
 
         return panel;
     }
+    
+    // create the role change tab
+    private JPanel createChangeRolePanel() {
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        // dancer list model and list
+        dancerRoleListModel = new DefaultListModel<>();
+        dancerRoleList = new JList<>(dancerRoleListModel);
+        dancerRoleList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane listScroll = new JScrollPane(dancerRoleList);
+        listScroll.setBorder(BorderFactory.createTitledBorder("Select Dancer"));
+        
+        // control panel for selection
+        JPanel controlPanel = new JPanel(new GridBagLayout());
+        controlPanel.setBorder(BorderFactory.createTitledBorder("New Role Details"));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // new role label
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        controlPanel.add(new JLabel("New Role:"), gbc);
+
+        // new role combo box
+        // same roles as onAddDancer method
+        roleChangeCombo = new JComboBox<>(new String[]{"leader", "member", "beginner", "expert"});
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        controlPanel.add(roleChangeCombo, gbc);
+
+        // reason label
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.0;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        controlPanel.add(new JLabel("Reason (optional):"), gbc);
+
+        // reason text field
+        roleChangeReasonField = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        controlPanel.add(roleChangeReasonField, gbc);
+        
+        // filler
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weighty = 1.0;
+        controlPanel.add(new JPanel(), gbc);
+
+        // split pane
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listScroll, controlPanel);
+        splitPane.setResizeWeight(0.5);
+        panel.add(splitPane, BorderLayout.CENTER);
+        
+        // button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton refreshButton = new JButton("Refresh List");
+        refreshButton.addActionListener(e -> refreshGuiLists());
+        buttonPanel.add(refreshButton);
+        
+        JButton applyButton = new JButton("Apply Role Change");
+        applyButton.addActionListener(e -> onChangeRole());
+        buttonPanel.add(applyButton);
+        
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        return panel;
+    }
+    
+    
     
     
     // data input methods
@@ -478,6 +564,7 @@ public class KurzusProjekt extends JFrame{
     
     // refresh gui lists
     private void refreshGuiLists() {
+        
         // refresh costumes
         costumeListModel.clear();
         for (Clothes c : TancProjekt.getCostumes()) {
@@ -486,21 +573,29 @@ public class KurzusProjekt extends JFrame{
             }
         }
 
-        // refresh dancers
+        // refresh dancers (costume tab)
         dancerListModel.clear();
         for (Dancer d : TancProjekt.getDancers()) {
             dancerListModel.addElement(d);
         }
         
+        // refresh dancers (change role tab)
+        // update list, so it reflects the new role
+        if (dancerRoleListModel != null) {
+            dancerRoleListModel.clear();
+            for (Dancer d : TancProjekt.getDancers()) {
+                dancerRoleListModel.addElement(d); // show the role
+            }
+        }
+        
         // refresh dance details list
-        if (danceSelectorListModel != null) { // Check if it's initialized
+        if (danceSelectorListModel != null) { // check if it's initialized
             danceSelectorListModel.clear();
             for (Dance d : TancProjekt.getDances()) {
                 danceSelectorListModel.addElement(d);
             }
         }
     }
-    
     
     
     private void onAssignCostume() {
@@ -554,6 +649,43 @@ public class KurzusProjekt extends JFrame{
         danceDescribeArea.setText(description);
     }
     
+    
+    // handle button click on role change tab
+    private void onChangeRole() {
+        Dancer selectedDancer = dancerRoleList.getSelectedValue();
+        String newRole = (String) roleChangeCombo.getSelectedItem();
+        String reason = roleChangeReasonField.getText();
+
+        if (selectedDancer == null) {
+            JOptionPane.showMessageDialog(this, "Please select a dancer from the list!", "Hiba", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (newRole == null) {
+            JOptionPane.showMessageDialog(this, "Please select a new role!", "Hiba", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (selectedDancer.getRole().equalsIgnoreCase(newRole)) {
+            JOptionPane.showMessageDialog(this, "The dancer already has that role.", "Információ", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        try {
+            // call logic method
+            TancProjekt.changeDancerRoleLogic(selectedDancer, newRole, reason);
+            JOptionPane.showMessageDialog(this, "Success! " + selectedDancer.getName() + "'s role has been changed to " + newRole + ".");
+            
+            // clear the reason field
+            roleChangeReasonField.setText("");
+            
+            // refresh all GUI lists to show the change
+            refreshGuiLists();
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error changing role: " + ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
     
 

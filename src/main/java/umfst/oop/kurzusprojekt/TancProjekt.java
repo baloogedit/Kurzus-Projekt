@@ -105,6 +105,31 @@ public class TancProjekt {
         }
     }
     
+    
+    //change the role of one dancer
+    public static void changeDancerRoleLogic(Dancer dancer, String newRole, String reason) throws InvalidRoleException {
+        if (dancer == null) {
+            throw new NullPointerException("Dancer cannot be null.");
+        }
+        
+        // role validation
+        if (!VALID_ROLES.contains(newRole.toLowerCase())) {
+            throw new InvalidRoleException("Invalid role: '" + newRole + "'. Must be one of: " + VALID_ROLES);
+        }
+
+        // use correct setRole method based on was a reason added or not
+        if (reason != null && !reason.trim().isEmpty()) {
+            dancer.setRole(newRole, reason);
+        } else {
+            dancer.setRole(newRole);
+        }
+        
+        saveDataToJson(); // save the change
+    }
+    
+    
+    
+    
     // returns the intro of all Person based objects
     public static String getAllPeopleIntros() {
         if (allPeople.isEmpty()) {
@@ -118,6 +143,8 @@ public class TancProjekt {
     }
 
 
+    
+    
     // JSON data handling
 
     // load the data from json file
