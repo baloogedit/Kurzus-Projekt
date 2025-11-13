@@ -55,7 +55,18 @@
             "dances": 4
         }
     ],
-    "staff": [],
+    "staff": [
+        {
+            "name": "Maria",
+            "department": "Konyveles",
+            "age": 30
+        },
+        {
+            "name": "Zoli",
+            "department": "Technikus",
+            "age": 23
+        }
+    ],
     "costumes": [
         {
             "size": "M",
@@ -110,7 +121,18 @@
             "place": "Gyergyoszentmiklos"
         }
     ],
-    "choreographers": [],
+    "choreographers": [
+        {
+            "yearsOfExperience": 32,
+            "name": "Fazi",
+            "age": 62
+        },
+        {
+            "yearsOfExperience": 36,
+            "name": "Berci",
+            "age": 67
+        }
+    ],
     "dances": [
         {
             "minutes": 3,
