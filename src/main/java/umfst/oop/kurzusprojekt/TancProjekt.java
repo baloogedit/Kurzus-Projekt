@@ -49,6 +49,7 @@ public class TancProjekt {
     // create new dancer
     public static void createDancer(String name, int age, String role, int dances) throws InvalidRoleException {
         if (!VALID_ROLES.contains(role.toLowerCase())) {
+            // my exception usage
             throw new InvalidRoleException("Invalid role: '" + role + "'. Must be one of: " + VALID_ROLES);
         }
         Dancer newDancer = new Dancer(name, age, role, dances);
@@ -112,7 +113,7 @@ public class TancProjekt {
             throw new NullPointerException("Dancer cannot be null.");
         }
         
-        // role validation
+        // role validation - excpetion handling
         if (!VALID_ROLES.contains(newRole.toLowerCase())) {
             throw new InvalidRoleException("Invalid role: '" + newRole + "'. Must be one of: " + VALID_ROLES);
         }
