@@ -4,6 +4,8 @@
  */
 package umfst.oop.kurzusprojekt;
 
+import java.util.List;
+
 /**
  *
  * @author edite
@@ -14,8 +16,23 @@ package umfst.oop.kurzusprojekt;
 // used in TancProject.java - creating dancer, changing dancer's role method
 public class InvalidRoleException extends Exception{
     
-    public InvalidRoleException(String message)
-    { 
-        super(message);    
+    // specific fields to store error details
+    private final String invalidRoleInput;
+    private final List<String> allowedRoles;
+
+    // constructor that takes the raw data
+    public InvalidRoleException(String invalidRoleInput, List<String> allowedRoles) {
+        // informative message
+        super("The role '" + invalidRoleInput + "' is not valid. Allowed roles are: " + allowedRoles);
+        this.invalidRoleInput = invalidRoleInput;
+        this.allowedRoles = allowedRoles;
+    }
+
+    public String getInvalidRoleInput() {
+        return invalidRoleInput;
+    }
+
+    public List<String> getAllowedRoles() {
+        return allowedRoles;
     }
 }

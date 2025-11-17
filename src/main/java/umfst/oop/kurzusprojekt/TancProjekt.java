@@ -50,7 +50,7 @@ public class TancProjekt {
     public static void createDancer(String name, int age, String role, int dances) throws InvalidRoleException {
         if (!VALID_ROLES.contains(role.toLowerCase())) {
             // my exception usage
-            throw new InvalidRoleException("Invalid role: '" + role + "'. Must be one of: " + VALID_ROLES);
+            throw new InvalidRoleException(role, VALID_ROLES);
         }
         Dancer newDancer = new Dancer(name, age, role, dances);
         dancers.add(newDancer);
@@ -115,7 +115,7 @@ public class TancProjekt {
         
         // role validation - excpetion handling
         if (!VALID_ROLES.contains(newRole.toLowerCase())) {
-            throw new InvalidRoleException("Invalid role: '" + newRole + "'. Must be one of: " + VALID_ROLES);
+            throw new InvalidRoleException(newRole, VALID_ROLES);
         }
 
         // use correct setRole method based on was a reason added or not

@@ -369,7 +369,15 @@ public class KurzusProjekt extends JFrame{
                 TancProjekt.createDancer(name, age, role, dances);
                 JOptionPane.showMessageDialog(this, "Táncos hozzáadva!");
                 refreshGuiLists(); // refresh lists
-            } catch (Exception ex) {
+            } 
+            catch (InvalidRoleException ex) {
+                // handling custom exception
+                String msg = "Hibás szerepkör: " + ex.getInvalidRoleInput() + "\n" +
+                             "Kérlek válassz egyet ezek közül: " + ex.getAllowedRoles();
+                JOptionPane.showMessageDialog(this, msg, "Szerepkör Hiba", JOptionPane.WARNING_MESSAGE);
+            } 
+            catch (Exception ex) {
+                // generic error handling - fallback
                 JOptionPane.showMessageDialog(this, "Hiba: " + ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -681,8 +689,16 @@ public class KurzusProjekt extends JFrame{
             
             // refresh all GUI lists to show the change
             refreshGuiLists();
-            
-        } catch (Exception ex) {
+        }
+        catch (InvalidRoleException ex) {
+            // specialized handling
+            System.err.println("Role mismatch! User tried: " + ex.getInvalidRoleInput());
+            JOptionPane.showMessageDialog(this, 
+                "Nem sikerült a szerepkör váltás.\nÉrvénytelen: " + ex.getInvalidRoleInput(), 
+                "Érvénytelen Adat", 
+                JOptionPane.WARNING_MESSAGE);
+        }
+        catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error changing role: " + ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
         }
     }
