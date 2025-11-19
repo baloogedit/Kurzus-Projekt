@@ -56,12 +56,15 @@ public class TancProjekt {
         
         // using equals method
         if (dancers.contains(newDancer)) {
-            System.out.println("Ez a táncos már létezik!");
-            return; // Or throw an exception
+            // throw new error that the GUI catches
+            throw new IllegalArgumentException("Ez a táncos már létezik a rendszerben: " + name);
         }
         
         dancers.add(newDancer);
         allPeople.add(newDancer);
+        
+        logPersonAddition(newDancer);//polimorph parameter passing usage
+        
         saveDataToJson(); // Automatikus mentés
     }
 
@@ -91,6 +94,7 @@ public class TancProjekt {
         Choreographer newChoreo = new Choreographer(name, age, experience);
         choreographers.add(newChoreo);
         allPeople.add(newChoreo);
+        logPersonAddition(newChoreo);//polimorph parameter passing usage
         saveDataToJson();
     }
     
@@ -99,6 +103,7 @@ public class TancProjekt {
         Staff newStaff = new Staff(name, age, department);
         staff.add(newStaff);
         allPeople.add(newStaff);
+        logPersonAddition(newStaff);//polimorph parameter passing usage
         saveDataToJson();
     }
 
@@ -203,18 +208,28 @@ public class TancProjekt {
                 } catch (Exception e) {
                     size = Size.M;
                 }
-                Clothes newCostume = new Clothes(c.getString("name"), size);
-                costumes.add(newCostume);
-
+                
+                Dancer assignedDancer = null;
+                // first, checking, if the item has assigned dancer
                 if (c.has("assignedTo") && !c.isNull("assignedTo")) {
                     String dancerName = c.getString("assignedTo");
                     for (Dancer d : dancers) {
                         if (d.getName().equalsIgnoreCase(dancerName)) {
-                            newCostume.setAssignedTo(d);
+                            assignedDancer = d;
                             break;
                         }
                     }
                 }
+                
+                Clothes newCostume;
+                // using the overloaded constructor if it is the case
+                if (assignedDancer != null) {
+                    newCostume = new Clothes(c.getString("name"), size, assignedDancer);
+                } else {
+                    newCostume = new Clothes(c.getString("name"), size);
+                }
+                
+                costumes.add(newCostume);
             }
 
             // Events
@@ -261,6 +276,11 @@ public class TancProjekt {
         } catch (JSONException e) {
             System.err.println(" Error parsing JSON: " + e.getMessage());
         }
+        finally
+        {
+            System.out.println("Load operation completed ");
+        }
+        
     }
 
     // save all data to json file
@@ -342,5 +362,14 @@ public class TancProjekt {
         } catch (IOException e) {
             System.err.println("Error writing to data.json: " + e.getMessage());
         }
+        finally
+        {
+            System.out.println("Save operation completed ");
+        }
+    }
+    
+    // polimorph paramater passing
+    public static void logPersonAddition(Person p) {
+        System.out.println("[LOG]: Új személy rögzítve: " + p.getName() + " (" + p.getClass().getSimpleName() + ")");
     }
 }
