@@ -53,6 +53,13 @@ public class TancProjekt {
             throw new InvalidRoleException(role, VALID_ROLES);
         }
         Dancer newDancer = new Dancer(name, age, role, dances);
+        
+        // using equals method
+        if (dancers.contains(newDancer)) {
+            System.out.println("Ez a táncos már létezik!");
+            return; // Or throw an exception
+        }
+        
         dancers.add(newDancer);
         allPeople.add(newDancer);
         saveDataToJson(); // Automatikus mentés
