@@ -69,10 +69,10 @@ public class KurzusProjekt extends JFrame{
         tabbedPane.addTab("Jelmez Kiadás", createAssignmentPanel());
 
         // tab 4 - dance details
-        tabbedPane.addTab("Dance Details", createDescribeDancePanel());
+        tabbedPane.addTab("Tánc részletek", createDescribeDancePanel());
         
         // tab 5 - change role
-        tabbedPane.addTab("Change Role", createChangeRolePanel());
+        tabbedPane.addTab("Szerep módosítása", createChangeRolePanel());
         
         // add tabs to window
         add(tabbedPane);
@@ -214,7 +214,7 @@ public class KurzusProjekt extends JFrame{
         danceSelectorList = new JList<>(danceSelectorListModel);
         danceSelectorList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane listScroll = new JScrollPane(danceSelectorList);
-        listScroll.setBorder(BorderFactory.createTitledBorder("Select Dance"));
+        listScroll.setBorder(BorderFactory.createTitledBorder("Válassz táncot"));
 
         // output area
         danceDescribeArea = new JTextArea();
@@ -223,33 +223,33 @@ public class KurzusProjekt extends JFrame{
         danceDescribeArea.setWrapStyleWord(true);
         danceDescribeArea.setLineWrap(true);
         JScrollPane textScroll = new JScrollPane(danceDescribeArea);
-        textScroll.setBorder(BorderFactory.createTitledBorder("Description"));
+        textScroll.setBorder(BorderFactory.createTitledBorder("Leírás"));
 
         // split pane for list and text area
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, listScroll, textScroll);
         splitPane.setResizeWeight(0.4); // Give 40% to the list
         panel.add(splitPane, BorderLayout.CENTER);
 
-        // 4. button panel
+        // button panel
         JPanel buttonPanel = new JPanel(new FlowLayout());
         
-        JButton refreshBtn = new JButton("Refresh List");
+        JButton refreshBtn = new JButton("Lista frissítése");
         refreshBtn.addActionListener(e -> refreshGuiLists()); // re-use the existing refresh method
         buttonPanel.add(refreshBtn);
 
-        JButton performBtn = new JButton("Perform");
+        JButton performBtn = new JButton("Előadás");
         performBtn.addActionListener(e -> onDescribeDance("perform"));
         buttonPanel.add(performBtn);
 
-        JButton originBtn = new JButton("Show Origin");
+        JButton originBtn = new JButton("Származás mutatása");
         originBtn.addActionListener(e -> onDescribeDance("origin"));
         buttonPanel.add(originBtn);
 
-        JButton durationBtn = new JButton("Show Duration");
+        JButton durationBtn = new JButton("Hossz mutatása");
         durationBtn.addActionListener(e -> onDescribeDance("duration"));
         buttonPanel.add(durationBtn);
 
-        JButton styleBtn = new JButton("Describe Style");
+        JButton styleBtn = new JButton("Stílus leírása");
         styleBtn.addActionListener(e -> onDescribeDance("style"));
         buttonPanel.add(styleBtn);
 
@@ -268,11 +268,11 @@ public class KurzusProjekt extends JFrame{
         dancerRoleList = new JList<>(dancerRoleListModel);
         dancerRoleList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane listScroll = new JScrollPane(dancerRoleList);
-        listScroll.setBorder(BorderFactory.createTitledBorder("Select Dancer"));
+        listScroll.setBorder(BorderFactory.createTitledBorder("Válassz táncost"));
         
         // control panel for selection
         JPanel controlPanel = new JPanel(new GridBagLayout());
-        controlPanel.setBorder(BorderFactory.createTitledBorder("New Role Details"));
+        controlPanel.setBorder(BorderFactory.createTitledBorder("Új szerep részletek"));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -281,7 +281,7 @@ public class KurzusProjekt extends JFrame{
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.LINE_END;
-        controlPanel.add(new JLabel("New Role:"), gbc);
+        controlPanel.add(new JLabel("Új szerep:"), gbc);
 
         // new role combo box
         // same roles as onAddDancer method
@@ -297,7 +297,7 @@ public class KurzusProjekt extends JFrame{
         gbc.gridy = 1;
         gbc.weightx = 0.0;
         gbc.anchor = GridBagConstraints.LINE_END;
-        controlPanel.add(new JLabel("Reason (optional):"), gbc);
+        controlPanel.add(new JLabel("Indok (opcionális):"), gbc);
 
         // reason text field
         roleChangeReasonField = new JTextField(20);
@@ -320,11 +320,11 @@ public class KurzusProjekt extends JFrame{
         
         // button panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton refreshButton = new JButton("Refresh List");
+        JButton refreshButton = new JButton("Lista frissítése");
         refreshButton.addActionListener(e -> refreshGuiLists());
         buttonPanel.add(refreshButton);
         
-        JButton applyButton = new JButton("Apply Role Change");
+        JButton applyButton = new JButton("Szerepcsere mentése");
         applyButton.addActionListener(e -> onChangeRole());
         buttonPanel.add(applyButton);
         
@@ -634,7 +634,7 @@ public class KurzusProjekt extends JFrame{
         Dance selectedDance = danceSelectorList.getSelectedValue();
         
         if (selectedDance == null) {
-            JOptionPane.showMessageDialog(this, "Please select a dance from the list first!", "No Dance Selected", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Kérlek válassz egy táncot először!", "Nincs tánc választva", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -665,17 +665,17 @@ public class KurzusProjekt extends JFrame{
         String reason = roleChangeReasonField.getText();
 
         if (selectedDancer == null) {
-            JOptionPane.showMessageDialog(this, "Please select a dancer from the list!", "Hiba", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Kérlek válassz egy táncost a listából!", "Hiba", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         if (newRole == null) {
-            JOptionPane.showMessageDialog(this, "Please select a new role!", "Hiba", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Kérlek válassz egy új szerepet!", "Hiba", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         if (selectedDancer.getRole().equalsIgnoreCase(newRole)) {
-            JOptionPane.showMessageDialog(this, "The dancer already has that role.", "Információ", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "A kiválasztott táncosnak már az a szerepe.", "Információ", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
